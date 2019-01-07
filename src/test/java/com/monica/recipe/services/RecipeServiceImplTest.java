@@ -1,5 +1,7 @@
 package com.monica.recipe.services;
 
+import com.monica.recipe.converters.RecipeCommandToRecipe;
+import com.monica.recipe.converters.RecipeToRecipeCommand;
 import com.monica.recipe.models.Recipe;
 import com.monica.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -24,11 +26,17 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
 
     }
 
