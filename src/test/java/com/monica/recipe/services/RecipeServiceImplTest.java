@@ -76,4 +76,14 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findAll();
 
     }
+
+
+    @Test
+    public void testDeleteById() {
+        Long idToDelete = 1L;
+
+        recipeService.deleteById(idToDelete);
+
+        verify(recipeRepository).deleteById(anyLong());
+    }
 }

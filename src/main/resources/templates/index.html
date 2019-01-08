@@ -28,13 +28,17 @@
                                 <th>ID</th>
                                 <th>Description</th>
                                 <th>View</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="recipe: ${recipies}">
                                 <td th:text="${recipe.getId()}">123</td>
                                 <td th:text="${recipe.getDescription()}">Testy as shit</td>
-                                <td><a th:href="@{'/recipe/show/'+${recipe.id}}" th:text="${recipe.id}">View</a></td>
+                                <td><a th:href="@{'/recipe/'+${recipe.id}+'/show'}">View</a></td>
+                                <td><a th:href="@{'/recipe/'+${recipe.id}+'/update'}">Edit</a></td>
+                                <td><a th:href="@{'/recipe/'+${recipe.id}+'/delete'}">Delete</a></td>
                             </tr>
                             </tbody>
                         </table>
