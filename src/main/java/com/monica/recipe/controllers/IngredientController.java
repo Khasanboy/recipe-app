@@ -1,6 +1,7 @@
 package com.monica.recipe.controllers;
 
 import com.monica.recipe.commands.RecipeCommand;
+import com.monica.recipe.services.IngredientService;
 import com.monica.recipe.services.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ public class IngredientController {
 
     private final RecipeService recipeService;
 
+    private final IngredientService ingredientService;
+
     @GetMapping("recipe/{id}/ingredients")
     public String listIngredients(@PathVariable String id, Model model){
 
@@ -21,6 +24,13 @@ public class IngredientController {
         model.addAttribute("recipe", recipeCommand);
 
         return "recipe/ingredient/list";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}/show")
+    public String showIngredient(@PathVariable String recipeId, @PathVariable String ingredientId, Model model){
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
+
+        return "recipe/ingredient/show";
     }
 
 
