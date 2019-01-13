@@ -25,10 +25,14 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
 
         final Ingredient ingredient = new Ingredient();
         ingredient.setId(ingredientCommand.getId());
-        //ingredient.setRecipe(ingredientCommand.getRecipeId());
+        if (ingredientCommand.getRecipeId() != null) {
+            //if (recipeService != null) { //Added for sake of tests
+            //    ingredient.setRecipe(recipeService.findById(ingredientCommand.getRecipeId()).get());
+            //}
+        }
         ingredient.setAmount(ingredientCommand.getAmount());
         ingredient.setDescription(ingredientCommand.getDescription());
-        ingredient.setUnitOfMeasure( unitOfMeasureCommandToUnitOfMeasure.convert(ingredientCommand.getUnitOfMeasure()));
+        ingredient.setUnitOfMeasure(unitOfMeasureCommandToUnitOfMeasure.convert(ingredientCommand.getUnitOfMeasure()));
 
         return ingredient;
     }

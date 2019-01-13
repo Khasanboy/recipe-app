@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Setter
 @Getter
 @NoArgsConstructor
-public class IngredientCommand {
+public class IngredientCommand implements Serializable {
     private Long id;
     private Long recipeId;
     private String description;
