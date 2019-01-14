@@ -2,6 +2,7 @@ package com.monica.recipe.controllers;
 
 import com.monica.recipe.commands.IngredientCommand;
 import com.monica.recipe.commands.RecipeCommand;
+import com.monica.recipe.commands.UnitOfMeasureCommand;
 import com.monica.recipe.services.IngredientService;
 import com.monica.recipe.services.RecipeService;
 import com.monica.recipe.services.UnitOfMeasureService;
@@ -39,6 +40,25 @@ public class IngredientController {
         return "recipe/ingredient/show";
     }
 
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String addNewIngredient(@PathVariable String recipeId, Model model){
+
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        //TODO reaise exception if null
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList", unitOfMeasureService.listAllUomCommands());
+
+        return "recipe/ingredient/ingredientform";
+    }
+
     @GetMapping("/recipe/{recipeId}/ingredient/{id}/update")
     public String updateIngredient(@PathVariable String recipeId, @PathVariable String id, Model model){
 
@@ -49,8 +69,8 @@ public class IngredientController {
 
     @PostMapping("/recipe/{recipeId}/ingredient")
     public String saveOrUpdateIngredient(@ModelAttribute IngredientCommand command){
-        ingredientService.saveIngredientCommand(command);
+        IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 
-        return "redirect:/recipe/"+command.getRecipeId()+"/ingredient/"+command.getId()+"/show";
+        return "redirect:/recipe/"+command.getRecipeId()+"/ingredient/"+savedCommand.getId()+"/show";
     }
 }

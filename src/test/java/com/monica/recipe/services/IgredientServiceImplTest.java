@@ -32,10 +32,10 @@ public class IgredientServiceImplTest {
 
     IngredientToIngredientCommand ingredientToIngredientCommand = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
 
-    IngredientCommandToIngredient ingredientCommandToIngredient = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
-
     @Mock
     UnitOfMeasureService unitOfMeasureService;
+
+    IngredientCommandToIngredient ingredientCommandToIngredient = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
 
     IngredientServiceImpl ingredientService;
 
@@ -43,7 +43,7 @@ public class IgredientServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         ingredientToIngredientCommand = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
-        ingredientService = new IngredientServiceImpl(recipeService, ingredientRepository, ingredientToIngredientCommand, ingredientCommandToIngredient, unitOfMeasureService);
+        ingredientService = new IngredientServiceImpl(recipeService, ingredientRepository, ingredientToIngredientCommand, unitOfMeasureService, ingredientCommandToIngredient);
 
     }
 
